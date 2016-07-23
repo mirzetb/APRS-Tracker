@@ -351,6 +351,28 @@ DIN A3, landscape with extra doc field</description>
 <rectangle x1="2.286" y1="1.016" x2="2.794" y2="1.524" layer="51"/>
 <rectangle x1="2.286" y1="-1.524" x2="2.794" y2="-1.016" layer="51"/>
 </package>
+<package name="POWERSUPPLY_DC-21MM">
+<description>DC 2.1mm Jack</description>
+<wire x1="-2.8575" y1="-6.35" x2="-5.08" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="-6.35" x2="-5.08" y2="-6.0325" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-6.35" x2="3.9116" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="3.9116" y1="-6.35" x2="3.9116" y2="3.6576" width="0.127" layer="21"/>
+<wire x1="3.9116" y1="3.6576" x2="3.9116" y2="7.1374" width="0.127" layer="21"/>
+<wire x1="3.9116" y1="7.1374" x2="-5.08" y2="7.1374" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="7.1374" x2="-5.08" y2="-0.635" width="0.127" layer="21"/>
+<wire x1="-5.0546" y1="3.6576" x2="3.9116" y2="3.6576" width="0.127" layer="21"/>
+<pad name="1" x="-5.08" y="-3.3528" drill="1.3" diameter="4" shape="octagon" rot="R90"/>
+<pad name="2" x="-0.0762" y="-6.35" drill="1.3" diameter="4" shape="octagon"/>
+<pad name="3" x="-0.0762" y="-0.3556" drill="1.3" diameter="4" shape="octagon" first="yes"/>
+<pad name="4" x="-5.08" y="-4.1148" drill="1.3"/>
+<pad name="5" x="-5.08" y="-2.5908" drill="1.3"/>
+<pad name="6" x="-0.8382" y="-0.3556" drill="1.3"/>
+<pad name="7" x="0.6858" y="-0.3556" drill="1.3"/>
+<pad name="8" x="-0.8382" y="-6.35" drill="1.3"/>
+<pad name="9" x="0.6858" y="-6.35" drill="1.3"/>
+<text x="6.35" y="-6.35" size="1.778" layer="25" ratio="5" rot="R90">&gt;NAME</text>
+<text x="8.89" y="-6.35" size="1.778" layer="27" ratio="5" rot="R90">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="20-I/O-2">
@@ -402,6 +424,17 @@ DIN A3, landscape with extra doc field</description>
 <pin name="4" x="5.08" y="0" visible="pad" length="short" direction="pas" function="dot" rot="R180"/>
 <pin name="5" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="6" x="5.08" y="-2.54" visible="pad" length="short" direction="pas" function="dot" rot="R180"/>
+</symbol>
+<symbol name="POWERSUPPLY_DC21PWR">
+<wire x1="-10.16" y1="5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
+<text x="-10.16" y="7.62" size="1.27" layer="94">&gt;NAME</text>
+<text x="-10.16" y="5.08" size="1.27" layer="94">&gt;VALUE</text>
+<pin name="1" x="-5.08" y="-10.16" length="middle" direction="pwr" rot="R90"/>
+<pin name="2" x="5.08" y="-10.16" length="middle" direction="pwr" rot="R90"/>
+<pin name="3" x="15.24" y="0" length="middle" direction="pwr" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -502,6 +535,23 @@ UART&lt;p&gt;
 <connect gate="A" pin="4" pad="4"/>
 <connect gate="A" pin="5" pad="5"/>
 <connect gate="A" pin="6" pad="6"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="POWERSUPPLY_DC21MM">
+<gates>
+<gate name="G$1" symbol="POWERSUPPLY_DC21PWR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="X" package="POWERSUPPLY_DC-21MM">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="3" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -9839,6 +9889,9 @@ general purpose rectifier, 1 A</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
+<class number="1" name="power" width="0.6096" drill="0.6096">
+<clearance class="1" value="0.254"/>
+</class>
 <class number="2" name="gnd" width="0.3048" drill="0.5588">
 <clearance class="2" value="0.254"/>
 </class>
@@ -9868,13 +9921,9 @@ general purpose rectifier, 1 A</description>
 <part name="C4" library="rcl" deviceset="C-EU" device="050-024X044" value="1u"/>
 <part name="C5" library="rcl" deviceset="C-EU" device="050-024X044" value="1u"/>
 <part name="BATERIJA" library="jumper" deviceset="JP1E" device=""/>
-<part name="P+6" library="supply1" deviceset="VCC" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
-<part name="PUNJAC" library="jumper" deviceset="JP1E" device=""/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
-<part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
-<part name="P+7" library="supply1" deviceset="VCC" device=""/>
 <part name="GND13" library="supply1" deviceset="GND" device=""/>
 <part name="GND14" library="supply1" deviceset="GND" device=""/>
 <part name="GND15" library="supply1" deviceset="GND" device=""/>
@@ -9896,13 +9945,16 @@ general purpose rectifier, 1 A</description>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="ANALOG" library="pinhead" deviceset="PINHD-1X5" device=""/>
 <part name="DIGITAL" library="pinhead" deviceset="PINHD-1X6" device=""/>
+<part name="GND19" library="supply1" deviceset="GND" device=""/>
+<part name="X1" library="SmartPrj" deviceset="POWERSUPPLY_DC21MM" device="X"/>
+<part name="JP1" library="jumper" deviceset="JP1E" device=""/>
+<part name="P+9" library="supply1" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="60.96" y="99.06" size="1.9304" layer="95">OSCILATOR</text>
 <text x="60.96" y="139.7" size="1.9304" layer="95">RESET</text>
-<text x="226.06" y="96.52" size="1.9304" layer="95">mini/micro USB?</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="-22.86" y="-53.34"/>
@@ -9926,14 +9978,10 @@ general purpose rectifier, 1 A</description>
 <instance part="R10" gate="G$1" x="215.9" y="55.88" rot="R90"/>
 <instance part="C4" gate="G$1" x="261.62" y="45.72"/>
 <instance part="C5" gate="G$1" x="218.44" y="78.74"/>
-<instance part="BATERIJA" gate="A" x="302.26" y="68.58"/>
-<instance part="P+6" gate="VCC" x="304.8" y="58.42" rot="R180"/>
+<instance part="BATERIJA" gate="A" x="302.26" y="73.66"/>
 <instance part="GND6" gate="1" x="302.26" y="58.42"/>
-<instance part="PUNJAC" gate="A" x="226.06" y="86.36"/>
 <instance part="GND10" gate="1" x="215.9" y="45.72"/>
-<instance part="GND11" gate="1" x="228.6" y="78.74"/>
 <instance part="GND12" gate="1" x="228.6" y="58.42" rot="R270"/>
-<instance part="P+7" gate="VCC" x="271.78" y="50.8" rot="R270"/>
 <instance part="GND13" gate="1" x="261.62" y="35.56"/>
 <instance part="GND14" gate="1" x="218.44" y="68.58"/>
 <instance part="GND15" gate="1" x="228.6" y="63.5" rot="R270"/>
@@ -9955,6 +10003,13 @@ general purpose rectifier, 1 A</description>
 <instance part="GND8" gate="1" x="187.96" y="38.1"/>
 <instance part="ANALOG" gate="A" x="147.32" y="96.52"/>
 <instance part="DIGITAL" gate="A" x="147.32" y="76.2"/>
+<instance part="GND19" gate="1" x="256.54" y="101.6"/>
+<instance part="X1" gate="G$1" x="261.62" y="124.46" smashed="yes">
+<attribute name="NAME" x="251.46" y="132.08" size="1.27" layer="94"/>
+<attribute name="VALUE" x="251.46" y="129.54" size="1.27" layer="94"/>
+</instance>
+<instance part="JP1" gate="A" x="314.96" y="73.66"/>
+<instance part="P+9" gate="VCC" x="317.5" y="33.02" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -9987,7 +10042,7 @@ general purpose rectifier, 1 A</description>
 <segment>
 <pinref part="BATERIJA" gate="A" pin="1"/>
 <pinref part="GND6" gate="1" pin="GND"/>
-<wire x1="302.26" y1="60.96" x2="302.26" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="302.26" y1="60.96" x2="302.26" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R10" gate="G$1" pin="1"/>
@@ -10008,11 +10063,6 @@ general purpose rectifier, 1 A</description>
 <pinref part="C5" gate="G$1" pin="2"/>
 <pinref part="GND14" gate="1" pin="GND"/>
 <wire x1="218.44" y1="71.12" x2="218.44" y2="73.66" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="PUNJAC" gate="A" pin="2"/>
-<pinref part="GND11" gate="1" pin="GND"/>
-<wire x1="228.6" y1="81.28" x2="228.6" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="TEMP"/>
@@ -10049,6 +10099,17 @@ general purpose rectifier, 1 A</description>
 <pinref part="R2" gate="G$1" pin="2"/>
 <pinref part="GND8" gate="1" pin="GND"/>
 <wire x1="187.96" y1="40.64" x2="187.96" y2="45.72" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="256.54" y1="114.3" x2="256.54" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="109.22" x2="256.54" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="109.22" x2="276.86" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="276.86" y1="109.22" x2="276.86" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="106.68" x2="256.54" y2="109.22" width="0.1524" layer="91"/>
+<junction x="256.54" y="109.22"/>
+<pinref part="X1" gate="G$1" pin="1"/>
+<pinref part="GND19" gate="1" pin="GND"/>
+<pinref part="X1" gate="G$1" pin="3"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -10125,19 +10186,6 @@ general purpose rectifier, 1 A</description>
 </net>
 <net name="VCC" class="0">
 <segment>
-<pinref part="BATERIJA" gate="A" pin="2"/>
-<pinref part="P+6" gate="VCC" pin="VCC"/>
-<wire x1="304.8" y1="60.96" x2="304.8" y2="66.04" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="BAT"/>
-<pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="261.62" y1="55.88" x2="261.62" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="P+7" gate="VCC" pin="VCC"/>
-<wire x1="261.62" y1="50.8" x2="261.62" y2="48.26" width="0.1524" layer="91"/>
-<wire x1="269.24" y1="50.8" x2="261.62" y2="50.8" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="81.28" y1="139.7" x2="81.28" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="P+2" gate="VCC" pin="VCC"/>
@@ -10175,6 +10223,11 @@ general purpose rectifier, 1 A</description>
 <pinref part="P+8" gate="VCC" pin="VCC"/>
 <wire x1="187.96" y1="78.74" x2="187.96" y2="73.66" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="JP1" gate="A" pin="2"/>
+<pinref part="P+9" gate="VCC" pin="VCC"/>
+<wire x1="317.5" y1="35.56" x2="317.5" y2="71.12" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$18" class="0">
 <segment>
@@ -10202,10 +10255,8 @@ general purpose rectifier, 1 A</description>
 <pinref part="IC1" gate="G$1" pin="VCC"/>
 <wire x1="233.68" y1="55.88" x2="226.06" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="226.06" y1="55.88" x2="226.06" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="PUNJAC" gate="A" pin="1"/>
 <wire x1="226.06" y1="71.12" x2="226.06" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="CE"/>
-<wire x1="226.06" y1="81.28" x2="226.06" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="63.5" x2="261.62" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="71.12" x2="226.06" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="LED6" gate="G$1" pin="A"/>
@@ -10217,6 +10268,9 @@ general purpose rectifier, 1 A</description>
 <wire x1="289.56" y1="63.5" x2="292.1" y2="63.5" width="0.1524" layer="91"/>
 <pinref part="C5" gate="G$1" pin="1"/>
 <wire x1="218.44" y1="81.28" x2="226.06" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="X1" gate="G$1" pin="2"/>
+<wire x1="266.7" y1="114.3" x2="226.06" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="226.06" y1="114.3" x2="226.06" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$24" class="0">
@@ -10375,6 +10429,22 @@ general purpose rectifier, 1 A</description>
 <pinref part="DIGITAL" gate="A" pin="6"/>
 <pinref part="MCU" gate="G$1" pin="(INT0)PD2"/>
 <wire x1="144.78" y1="71.12" x2="129.54" y2="71.12" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$31" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="BAT"/>
+<pinref part="C4" gate="G$1" pin="1"/>
+<wire x1="261.62" y1="55.88" x2="261.62" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="50.8" x2="261.62" y2="48.26" width="0.1524" layer="91"/>
+<pinref part="BATERIJA" gate="A" pin="2"/>
+<wire x1="304.8" y1="71.12" x2="304.8" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="304.8" y1="66.04" x2="309.88" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="JP1" gate="A" pin="1"/>
+<wire x1="309.88" y1="66.04" x2="314.96" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="66.04" x2="314.96" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="50.8" x2="309.88" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="50.8" x2="309.88" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
