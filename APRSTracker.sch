@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.5.0">
+<eagle version="7.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -10848,6 +10848,7 @@ Source: www.kingbright.com</description>
 <text x="147.32" y="88.9" size="5.08" layer="95">V-BAT</text>
 <text x="35.56" y="88.9" size="5.08" layer="95">MICROCONTROLLER</text>
 <wire x1="119.38" y1="106.68" x2="119.38" y2="2.54" width="0.1524" layer="95" style="longdash"/>
+<text x="73.66" y="223.52" size="1.778" layer="95" rot="R90">SMA</text>
 </plain>
 <instances>
 <instance part="MCU" gate="G$1" x="63.5" y="43.18"/>
