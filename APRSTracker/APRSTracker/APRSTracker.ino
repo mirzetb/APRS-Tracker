@@ -1,5 +1,5 @@
 /*
- * APRS Tracker
+ * APRS Tracker [2016]
  * Mirzet Brkić E71TMB
  * Faculty of Electrical Engineering University of Sarajevo
  */
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// Trackuino custom libs
+// APRSTracker custom libs
 #include "config.h"
 #include "afsk_avr.h"
 #include "aprs.h"
@@ -45,7 +45,9 @@ void setup()
 {
   pinMode(LED_PIN, OUTPUT);
   pin_write(LED_PIN, LOW);
-
+  pinMode(PD, OUTPUT);
+  pin_write(PD, HIGH);
+  
   Serial.begin(GPS_BAUDRATE);
 #ifdef DEBUG_RESET
   Serial.println("RESET");
@@ -56,12 +58,14 @@ void setup()
   sensors_setup();
 
 #ifdef DEBUG_SENS
-  Serial.print("Ti=");
-  Serial.print(sensors_int_lm60());
-  Serial.print(", Te=");
-  Serial.print(sensors_ext_lm60());
-  Serial.print(", Vin=");
-  Serial.println(sensors_vin());
+  Serial.print("V=");
+  Serial.print(read_battery_voltage());
+  Serial.print(", T=");
+  Serial.print(read_temperature_dht22());
+  Serial.print(", H=");
+  Serial.println(read_humidity_dht22());
+  Serial.print(", P=");
+  Serial.println(read_pressure_bmp180());
 #endif
 
   // Do not start until we get a valid time reference
@@ -78,8 +82,6 @@ void setup()
   else {
     next_aprs = millis();
   }
-  // TODO: beep while we get a fix, maybe indicating the number of
-  // visible satellites by a series of short beeps?
 }
 
 void get_pos()

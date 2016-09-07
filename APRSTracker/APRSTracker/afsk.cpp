@@ -1,4 +1,4 @@
- // trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
+// trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
 
 /* Credit to:
  *
@@ -33,7 +33,7 @@ static const uint8_t SAMPLE_FIFO_SIZE = 32;
 
 // Module globals
 volatile static uint8_t current_byte;
-volatile static uint16_t current_sample_in_baud;          // 1 bit = SAMPLES_PER_BAUD samples
+volatile static uint16_t current_sample_in_baud;         // 1 bit = SAMPLES_PER_BAUD samples
 volatile static bool go = false;                         // Modem is on
 volatile static uint16_t phase_delta;                    // 1200/2200 for standard AX.25
 volatile static uint16_t phase;                          // Fixed point 9.7 (2PI = TABLE_SIZE)
@@ -51,7 +51,6 @@ volatile static const uint8_t *afsk_packet;
 
 
 // Module functions
-
 inline static bool afsk_is_fifo_full()
 {
   return (((sample_fifo_head + 1) % SAMPLE_FIFO_SIZE) == sample_fifo_tail);
@@ -108,7 +107,6 @@ inline static uint8_t afsk_fifo_out_safe()
 
 
 // Exported functions
-
 void afsk_setup()
 {
   // Start radio

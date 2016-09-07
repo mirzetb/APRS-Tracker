@@ -1,4 +1,4 @@
- // trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
+// trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
 
 #ifdef AVR
 

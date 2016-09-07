@@ -1,4 +1,4 @@
- // trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
+// trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
 
 #ifdef AVR
 
@@ -54,7 +54,6 @@ extern const uint8_t afsk_sine_table[512] PROGMEM = {
 };
 
 // External consts
-
 extern const uint32_t MODEM_CLOCK_RATE = F_CPU; // 16 MHz
 extern const uint8_t REST_DUTY         = 127;
 extern const uint16_t TABLE_SIZE       = sizeof(afsk_sine_table);
@@ -63,7 +62,6 @@ extern const uint32_t PLAYBACK_RATE    = MODEM_CLOCK_RATE / 256;  // Fast PWM
 
 
 // Exported functions
-
 void afsk_timer_setup()
 {
   // Set up Timer 2 to do pulse width modulation on the speaker
@@ -124,7 +122,5 @@ void afsk_timer_stop()
   // Disable playback interrupt
   TIMSK2 &= ~_BV(TOIE2);
 }
-
-
 
 #endif // ifdef AVR

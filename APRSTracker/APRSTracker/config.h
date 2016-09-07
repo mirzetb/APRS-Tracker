@@ -1,11 +1,11 @@
- // trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7 
+// trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
 
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
 
 // --------------------------------------------------------------------------
-// THIS IS THE TRACKUINO FIRMWARE CONFIGURATION FILE. YOUR CALLSIGN AND
+// THIS IS THE APRSTracker FIRMWARE CONFIGURATION FILE. YOUR CALLSIGN AND
 // OTHER SETTINGS GO HERE.
 //
 // NOTE: all pins are Arduino based, not the Atmega chip. Mapping:
@@ -24,8 +24,8 @@
 // - Cars:       9
 // - Home:       0
 // - IGate:      5
-#define S_CALLSIGN      "MYCALL"
-#define S_CALLSIGN_ID   11
+#define S_CALLSIGN      "E71TMB"
+#define S_CALLSIGN_ID   0
 
 // Destination callsign: APRS (with SSID=0) is usually okay.
 #define D_CALLSIGN      "APRS"
@@ -35,13 +35,13 @@
 // (read more about digipeating paths here: http://wa8lmf.net/DigiPaths/ )
 // The recommended digi path for a balloon is WIDE2-1 or pathless. The default
 // is pathless. Uncomment the following two lines for WIDE2-1 path:
-#define DIGI_PATH1      "WIDE2"
-#define DIGI_PATH1_TTL  1
+// #define DIGI_PATH1      "WIDE2"
+// #define DIGI_PATH1_TTL  1
 
 // APRS comment: this goes in the comment portion of the APRS message. You
 // might want to keep this short. The longer the packet, the more vulnerable
 // it is to noise.
-#define APRS_COMMENT    "Trackuino reminder: replace callsign with your own"
+#define APRS_COMMENT    "APRSTracker ba.unsa.etf."
 
 
 // --------------------------------------------------------------------------
@@ -60,15 +60,9 @@
 // the formula:
 //
 //         APRS_SLOT (seconds) + n * APRS_PERIOD (seconds)
-//
-// When launching multiple balloons, use the same APRS_PERIOD in all balloons
-// and set APRS_SLOT so that the packets are spaced equally in time.
-// Eg. for two balloons and APRS_PERIOD = 60, set APRS_SLOT to 0 and 30,
-// respectively. The first balloon will transmit at 00:00:00, 00:01:00,
-// 00:02:00, etc. and the second balloon will transmit at 00:00:30, 00:01:30,
-// 00:02:30, etc.
-#define APRS_SLOT     0     // seconds. -1 disables slotted transmissions
-#define APRS_PERIOD   5    // seconds 60
+
+#define APRS_SLOT    -1     // seconds. -1 disables slotted transmissions
+#define APRS_PERIOD   15    // seconds 15
 
 // GPS baud rate (in bits per second). This is also the baud rate at which
 // debug data will be printed out the serial port.
@@ -92,16 +86,32 @@
 #define PRE_EMPHASIS    1
 
 // --------------------------------------------------------------------------
-// Radio config (radio_hx1.cpp)
+// Radio config (radio.cpp)
 // --------------------------------------------------------------------------
 
 // This is the PTT pin
 #define PTT_PIN           4
 
+// This is PD pin (Power saving control pin: Low->sleep mode; High-> normal mode
+#define PD                2
+
 // --------------------------------------------------------------------------
 // Sensors config (sensors.cpp)
 // --------------------------------------------------------------------------
 
+// This is DHT22 data pin
+#define  DHT22_PIN 8
+
+// This is analog pin used for battery voltage measuring
+#define V_PIN A0
+
+// This is 1N4004 diode parametar inicating it's 'constant' voltage drop * analog range (0.53 * 1024), used for battery voltage measuring
+#define V_DIODE 542.72
+
+// This is LED pin used for battery voltage indication.
+#define LED_PIN                 7
+
+// delete
 // Most of the sensors.cpp functions use internal reference voltages (either
 // AVCC or 1.1V). If you want to use an external reference, you should
 // uncomment the following line:
@@ -115,7 +125,7 @@
 // It is always advised to connect the AREF pin through a pull-up resistor,
 // whose value is defined here in ohms (set to 0 if no pull-up):
 //
-#define AREF_PULLUP           4700
+// #define AREF_PULLUP           4700
 //
 // Since there is already a 32K resistor at the ADC pin, the actual
 // voltage read will be VREF * 32 / (32 + AREF_PULLUP)
@@ -125,61 +135,29 @@
 
 // Pin mappings for the internal / external temperature sensors. VS refers
 // to (arduino) digital pins, whereas VOUT refers to (arduino) analog pins.
-#define INTERNAL_LM60_VS_PIN     6
-#define INTERNAL_LM60_VOUT_PIN   0
-#define EXTERNAL_LM60_VS_PIN     7
-#define EXTERNAL_LM60_VOUT_PIN   1
+// #define INTERNAL_LM60_VS_PIN     6
+// #define INTERNAL_LM60_VOUT_PIN   0
+// #define EXTERNAL_LM60_VS_PIN     7
+// #define EXTERNAL_LM60_VOUT_PIN   1
 
 // Units for temperature sensors (Added by: Kyle Crockett)
 // 1 = Celsius, 2 = Kelvin, 3 = Fahrenheit
-#define TEMP_UNIT 1
+// #define TEMP_UNIT 1
 
 // Calibration value in the units selected. Use integer only.
-#define CALIBRATION_VAL 0
+// #define CALIBRATION_VAL 0
 
 // Resistors divider for the voltage meter (ohms)
-#define VMETER_R1       10000
-#define VMETER_R2       3300
+// #define VMETER_R1       10000
+// #define VMETER_R2       3300
 
 // Voltage meter analog pin
-#define VMETER_PIN      2
+// #define VMETER_PIN      2
 
-// --------------------------------------------------------------------------
-// Buzzer config (buzzer.cpp)
-// --------------------------------------------------------------------------
-
-// Type of buzzer (0=active, 1=passive). An active buzzer is driven by a
-// DC voltage. A passive buzzer needs a PWM signal.
-#define BUZZER_TYPE             0
-
-// When using a passive buzzer, specify the PWM frequency here. Choose one
-// that maximizes the volume according to the buzzer's datasheet. Not all
-// the frequencies are valid, check out the buzzer_*.cpp code. On Arduino,
-// it must be between L and 65535, where L = F_CPU / 65535 and F_CPU is the
-// clock rate in hertzs. For 16 MHz Arduinos, this gives a lower limit of
-// 245 Hz.
-#define BUZZER_FREQ             895     // Hz
-
-// These are the number of seconds the buzzer will stay on/off alternately
-#define BUZZER_ON_TIME          1       // secs
-#define BUZZER_OFF_TIME         2       // secs
-
-// This option disables the buzzer above BUZZER_ALTITUDE meters. This is a
-// float value, so make it really high (eg. 1000000.0 = 1 million meters)
-// if you want it to never stop buzzing.
-#define BUZZER_ALTITUDE         3000.0  // meters (1 ft = 0.3048 m)
-
-// The options here are pin 9 or 10
-#define BUZZER_PIN              9
 
 // --------------------------------------------------------------------------
 // Debug
 // --------------------------------------------------------------------------
-
-// This is the LED pin (13 on Arduinos). The LED will be on while the AVR is
-// running and off while it's sleeping, so its brightness gives an indication
-// of the CPU activity.
-#define LED_PIN                 13
 
 // Debug info includes printouts from different modules to aid in testing and
 // debugging.
@@ -200,7 +178,7 @@
 //    will get errors.
 
 // #define DEBUG_GPS    // GPS sentence dump and checksum validation
-// #define DEBUG_AX25   // AX.25 frame dump
+#define DEBUG_AX25   // AX.25 frame dump
 // #define DEBUG_MODEM  // Modem ISR overrun and profiling
 // #define DEBUG_AFSK   // AFSK (modulation) output
 // #define DEBUG_RESET  // AVR reset

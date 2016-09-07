@@ -1,5 +1,3 @@
- // trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
-
 #ifndef __RADIO_H__
 #define __RADIO_H__
 

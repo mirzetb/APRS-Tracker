@@ -1,4 +1,4 @@
- // trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
+// trackuino copyright (C) 2010  EA5HAV Javi, APRSTracker.ino l.7
 
 #include "ax25.h"
 #include "config.h"
@@ -16,8 +16,7 @@ static uint8_t packet[MAX_PACKET];
 static unsigned int packet_size;
 
 // Module functions
-static void
-update_crc(uint8_t a_bit)
+static void update_crc(uint8_t a_bit)
 {
   crc ^= a_bit;
   if (crc & 1)
@@ -26,8 +25,7 @@ update_crc(uint8_t a_bit)
     crc = crc >> 1;
 }
 
-static void
-send_byte(uint8_t a_byte)
+static void send_byte(uint8_t a_byte)
 {
   uint8_t i = 0;
   while (i++ < 8) {
@@ -52,8 +50,7 @@ send_byte(uint8_t a_byte)
 }
 
 // Exported functions
-void
-ax25_send_byte(uint8_t a_byte)
+void ax25_send_byte(uint8_t a_byte)
 {
   // Wrap around send_byte, but prints debug info
   send_byte(a_byte);
@@ -62,8 +59,7 @@ ax25_send_byte(uint8_t a_byte)
 #endif
 }
 
-void
-ax25_send_flag()
+void ax25_send_flag()
 {
   uint8_t flag = 0x7e;
   int i;
@@ -77,8 +73,7 @@ ax25_send_flag()
   }
 }
 
-void
-ax25_send_string(const char *string)
+void ax25_send_string(const char *string)
 {
   int i;
   for (i = 0; string[i]; i++) {
@@ -86,8 +81,7 @@ ax25_send_string(const char *string)
   }
 }
 
-void
-ax25_send_header(const struct s_address *addresses, int num_addresses)
+void ax25_send_header(const struct s_address *addresses, int num_addresses)
 {
   int i, j;
   packet_size = 0;
@@ -149,8 +143,7 @@ ax25_send_header(const struct s_address *addresses, int num_addresses)
 #endif
 }
 
-void
-ax25_send_footer()
+void ax25_send_footer()
 {
   // Save the crc so that it can be treated it atomically
   uint16_t final_crc = crc;
@@ -167,8 +160,7 @@ ax25_send_footer()
 #endif
 }
 
-void
-ax25_flush_frame()
+void ax25_flush_frame()
 {
   // Key the transmitter and send the frame
   afsk_send(packet, packet_size);
