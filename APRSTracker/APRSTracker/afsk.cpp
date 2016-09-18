@@ -176,6 +176,7 @@ bool afsk_flush()
 #ifdef DEBUG_AFSK
     Serial.print((uint16_t)s);
     Serial.print('/');
+    Serial.print(" ");
 #endif
 
 #if PRE_EMPHASIS == 1
@@ -193,7 +194,7 @@ bool afsk_flush()
     current_sample_in_baud += (1 << 8);
     if (current_sample_in_baud >= SAMPLES_PER_BAUD) {
 #ifdef DEBUG_AFSK
-      Serial.println();
+     Serial.println();
 #endif
       packet_pos++;
       current_sample_in_baud -= SAMPLES_PER_BAUD;

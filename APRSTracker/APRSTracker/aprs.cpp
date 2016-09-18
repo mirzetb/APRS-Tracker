@@ -61,12 +61,11 @@ void aprs_send()
   ax25_send_string("/H=");
   dtostrf(read_humidity_dht22(), 6, 2, temp);
   ax25_send_string(temp);
-/*
+
   ax25_send_string("/P=");
   dtostrf(read_pressure_bmp180(), 7, 2, temp);
   ax25_send_string(temp);
-  */
-
+ 
   ax25_send_byte(' ');
   ax25_send_string(APRS_COMMENT);     // Comment
   ax25_send_footer();

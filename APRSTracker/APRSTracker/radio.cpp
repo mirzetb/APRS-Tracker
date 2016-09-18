@@ -14,7 +14,7 @@ void Radio::setup()
 void Radio::ptt_on()
 {
   pin_write(PTT_PIN, LOW);
-  delay(25);   
+  delay(50); // bilo 25   
 }
 
 void Radio::ptt_off()

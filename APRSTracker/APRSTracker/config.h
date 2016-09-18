@@ -62,7 +62,7 @@
 //         APRS_SLOT (seconds) + n * APRS_PERIOD (seconds)
 
 #define APRS_SLOT    -1     // seconds. -1 disables slotted transmissions
-#define APRS_PERIOD   15    // seconds 15
+#define APRS_PERIOD   10    // seconds 15
 
 // GPS baud rate (in bits per second). This is also the baud rate at which
 // debug data will be printed out the serial port.
@@ -105,8 +105,8 @@
 // This is analog pin used for battery voltage measuring
 #define V_PIN A0
 
-// This is 1N4004 diode parametar inicating it's 'constant' voltage drop * analog range (0.53 * 1024), used for battery voltage measuring
-#define V_DIODE 542.72
+// This is 1N4004 diode parametar inicating it's 'constant' voltage drop * analog range (0.53 * 1023), used for battery voltage measuring
+#define V_DIODE 542.19
 
 // This is LED pin used for battery voltage indication.
 #define LED_PIN                 7
@@ -180,7 +180,7 @@
 // #define DEBUG_GPS    // GPS sentence dump and checksum validation
 #define DEBUG_AX25   // AX.25 frame dump
 // #define DEBUG_MODEM  // Modem ISR overrun and profiling
-// #define DEBUG_AFSK   // AFSK (modulation) output
+#define DEBUG_AFSK   // AFSK (modulation) output
 // #define DEBUG_RESET  // AVR reset
 // #define DEBUG_SENS   // Sensors
 
